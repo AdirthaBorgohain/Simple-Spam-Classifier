@@ -19,8 +19,14 @@ import pandas as pd
 # for generating test-train split
 import numpy as np
 
+# read csv file
 mails = pd.read_csv('spam.csv', encoding = 'latin-1')
-X = mails.iloc[:, 1].values
-y = mails.iloc[:, 0].values
-dx = pd.DataFrame(X)
-dy = pd.DataFrame(y)
+
+# remove unneeded columns
+mails.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis = 1, inplace = True)
+
+# rename the two columns
+mails.rename(columns = {'v1': 'labels', 'v2': 'message'}, inplace = True)
+
+# map ham and spam to 0 and 1 respectively
+mails['label'] = mails['labels'].map({'ham': 0, 'spam': 1})
