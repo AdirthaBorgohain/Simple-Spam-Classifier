@@ -50,10 +50,22 @@ trainData.drop(['index'], axis = 1, inplace = True)
 testData.reset_index(inplace = True)
 testData.drop(['index'], axis = 1, inplace = True)
 
+#Wordcloud plotting for better visualization
+
+#spam words
 spam_words = ' '.join(list(mails[mails['label'] == 1]['message']))
 spam_wc = WordCloud(width = 512,height = 512).generate(spam_words)
 plt.figure(figsize = (10, 8), facecolor = 'k')
 plt.imshow(spam_wc)
+plt.axis('off')
+plt.tight_layout(pad = 0)
+plt.show()
+
+#ham words
+ham_words = ' '.join(list(mails[mails['label'] == 0]['message']))
+ham_wc = WordCloud(width = 512,height = 512).generate(ham_words)
+plt.figure(figsize = (10, 8), facecolor = 'k')
+plt.imshow(ham_wc)
 plt.axis('off')
 plt.tight_layout(pad = 0)
 plt.show()
